@@ -4,7 +4,9 @@
   Include:
   - @all_ratings.each do |rating|
     = rating
-    - if !session[:filtered_ratings].include? rating
+    - if session[:filtered_ratings].nil?
+      = check_box_tag "ratings[#{rating}]", 1, true, :id => 'ratings_#{rating}'
+    - elsif !session[:filtered_ratings].include? rating
       = check_box_tag "ratings[#{rating}]", 1, false, :id => 'ratings_#{rating}'
     - else
       = check_box_tag "ratings[#{rating}]", 1, true, :id => 'ratings_#{rating}'  
